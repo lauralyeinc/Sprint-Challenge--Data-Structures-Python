@@ -49,4 +49,44 @@ print (f"runtime: {end_time - start_time} seconds")
 # What's the best time you can accomplish?  Thare are no restrictions on techniques or data
 # structures, but you may not import any additional libraries that you did not write yourself.
 
+start = time.time()
+f = open('names_1.txt', 'r')
+names_1 = f.read().split("\n")
+f.close()
 
+f = open('names_2.txt', 'r')
+names_2 = f.read().split("\n")
+f.close()
+
+#https://www.w3schools.com/python/ref_func_sorted.asp
+names_1 = sorted(names_1)
+names_2 = sorted(names_2)
+
+
+names_1_split_a = names_1[:5000] #assending
+names_1_split_b = names_1[5000:] #desending 
+names_1_split_b.reverse()
+
+duplicated_names = []
+
+for name1 in names_1_split_a:
+    for name2 in names_2:
+        if name2[0] > name1[0]:
+            break
+        if name1 == name2:
+            duplicated_names.append(name1)
+
+names_2.reverse()
+
+for name1 in names_1_split_b:
+    if name2 in names_2:
+        if name2[0] < name1[0]:
+            break
+        if name1 == name2:
+            duplicated_names.append(name1)
+
+print(f"{len(duplicated_names)} duplicated names:")
+end = time.time()
+print (f"runtime: {end - start} seconds")
+
+#4.0350658893585205 seconds  not the better "ideal", the mvp ^^^^ is better! 
